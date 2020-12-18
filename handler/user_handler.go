@@ -1,4 +1,4 @@
-package user
+package handler
 
 import (
 	"fmt"
@@ -7,10 +7,14 @@ import (
 	"github.com/gmae199boy/avi_golang/db"
 	// "github.com/gmae199boy/avi_golang/fileSystem"
 	"github.com/gmae199boy/avi_golang/model"
-	// "github.com/davecgh/go-spew/spew"
+	"github.com/davecgh/go-spew/spew"
 )
 
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+type UserHandler struct {
+
+}
+
+func (h UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	// 유저 정보를 body에서 꺼내와 json 파싱한다.
 	var user model.User
 	e := json.NewDecoder(r.Body).Decode(&user)
@@ -44,4 +48,16 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	// i, _ := json.Marshal(user)
 
 	// spew.Dump(i)
+}
+
+func (h UserHandler) ReadUser(w http.ResponseWriter, r *http.Request) {
+	var user model.User
+	e := json.NewDecoder(r.Body).Decode(&user)
+	if e != nil {
+		fmt.Println(e)
+		fmt.Fprintf(w, e.Error())
+		return
+	}
+
+	spew.Dump(user)
 }

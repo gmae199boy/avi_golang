@@ -1,4 +1,4 @@
-package video
+package handler
 
 import (
 	"fmt"
@@ -9,7 +9,9 @@ import (
 	"os/exec"
 )
 
-func UploadVideo(w http.ResponseWriter, r *http.Request) {
+type VideoHandler struct {}
+
+func (h VideoHandler) UploadVideo(w http.ResponseWriter, r *http.Request) {
 	f := new(FFMPEG)
 	f.RunFfmpeg()
 	fmt.Fprintf(w, "video convert complete")

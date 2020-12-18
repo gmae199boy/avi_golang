@@ -1,23 +1,25 @@
-package folder
+package router
 
 import (
 	"fmt"
 	"net/http"
+	"github.com/gmae199boy/avi_golang/handler"
 )
 
 func FolderRouter(w http.ResponseWriter, r *http.Request) {
+	var handler handler.FolderHandler = handler.FolderHandler{}
 	switch r.Method {
 	case "GET": {
-		GetFolderList(w, r)
+		handler.GetFolderList(w, r)
 	}; break
 	case "POST": {
-		CreateFolder(w, r)
+		handler.CreateFolder(w, r)
 	}; break
 	case "PUT": {
 
 	}; break
 	case "DELETE": {
-		DeleteFolder(w, r)
+		handler.DeleteFolder(w, r)
 	}; break
 	default: {
 		fmt.Println("Method Error!! not GET,POST,PUT,DELETE")
