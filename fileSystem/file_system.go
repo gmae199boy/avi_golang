@@ -2,8 +2,10 @@ package fileSystem
 
 import (
 	"os"
+	"io/ioutil"
 	"log"
 	"errors"
+	// "github.com/davecgh/go-spew/spew"
 )
 
 func CreateFolder(path string, mode os.FileMode) error {
@@ -30,19 +32,27 @@ func DeleteFolder(path string) error {
 	return errors.New("FileSystem Error: prociser has gone")
 }
 
-func OpenFolder(path string) error {
-    f, err := os.Open(path)
+func ReadNameOfFileList(path string) ([]string, error) {
+    // f, err := os.Open(path)
+    // if err != nil {
+	// 	log.Println(err)
+	// 	return nil, err
+	// }
+	fullPath := "./assets/" + path
+    files, err := ioutil.ReadDir(fullPath)
+    // f.Close()
     if err != nil {
-        log.Println(err)
-    }
-    files, err := f.Readdir(-1)
-    f.Close()
-    if err != nil {
-        log.Println(err)
-    }
-
-    for _, file := range files {
-        log.Println(file.Name())
+		log.Println(err)
+		return nil, err
 	}
-	return errors.New("asd")
+
+	fileName := make([]string, len(files))
+    for i, file := range files {
+		// if file[0:1] == "." {
+		// 	continue
+		// }
+		fileName[i] = file.Name()
+	}
+	log.Println(fileName)
+	return fileName, nil
 }

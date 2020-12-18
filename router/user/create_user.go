@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/gmae199boy/avi_golang/db"
-	"github.com/gmae199boy/avi_golang/fileSystem"
+	// "github.com/gmae199boy/avi_golang/fileSystem"
 	"github.com/gmae199boy/avi_golang/model"
 	// "github.com/davecgh/go-spew/spew"
 )
@@ -32,12 +32,12 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	// 유저가 생성되었기 때문에 유저에 대한 파일을 생성
 	// 0777: chmod -R 777 mod
-	fe := fileSystem.CreateFolder(user.Name, 0777)
-	if fe != nil {
-		fmt.Println(fe)
-		fmt.Fprintf(w, fe.Error())
-		return
-	}
+	// fe := fileSystem.CreateFolder(user.Name, 0777)
+	// if fe != nil {
+	// 	fmt.Println(fe)
+	// 	fmt.Fprintf(w, fe.Error())
+	// 	return
+	// }
 	fmt.Fprintf(w, "create user successful")
 	// 저장된 유저 정보를 그대로 리턴한다
 	// echo data

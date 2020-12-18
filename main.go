@@ -10,12 +10,15 @@ import (
     "github.com/gmae199boy/avi_golang/router/video"
     "github.com/gmae199boy/avi_golang/router/user"
     "github.com/gmae199boy/avi_golang/router/folder"
+
+    "github.com/joho/godotenv"
 )
 
 // const maxUploadSize = 2 * 1024 * 1024 // 2 mb
 // const uploadPath = "./assets"
 
 func main() {
+    godotenv.Load()
     runtime.GOMAXPROCS(4)
     context.Background()
 
@@ -23,7 +26,7 @@ func main() {
     // http.Handle("/video/", http.StripPrefix("/video", fs))
 
     // All handling url : video
-    http.HandleFunc("/v1/video", video.VideoRouter)
+    http.HandleFunc("/v1/video", video.VideoRouter) 
 
     // All handling url : file
     http.HandleFunc("/v1/folder", folder.FolderRouter)
